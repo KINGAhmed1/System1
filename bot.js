@@ -288,5 +288,47 @@ var avt = args || message.author.id;
     })
   }
 })
+
+client.on('message', message => {
+                      if (message.content.startsWith(prefix + 'اسرع')) {
+                        if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
+                      
+                      const type = require('./2sr3.json');
+                      const item = type[Math.floor(Math.random() * type.length)];
+                      const filter = response => {
+                          return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
+                      };
+                      message.channel.send('** لديك 15 ثانيه لكتابه هذه الكلمه بسرعة**').then(msg => {
+                      
+                            
+                      msg.channel.send(`${item.type}`).then(() => {
+                              message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
+                              .then((collected) => {
+                          message.channel.send(`${collected.first().author} ✅ **احسنت لقد تمكنت من كتابه هذه الكلمه بسرعه**`);
+                          console.log(`[Typing] ${collected.first().author} typed the word.`);
+                                })
+                                .catch(collected => {
+                                  message.channel.send(`:x: **لم يتمكن احد من كتابه هذه الكلمه في الوقت المناسب**`);
+                                })
+                          })
+                        })
+                      }
+                      });
+                      
+                      client.on('message', message => {  
+    if (message.author.bot) return; 
+    if (message.content.startsWith(prefix + 'clear')) { 
+    if(!message.channel.guild) return message.reply(`** This Command For Servers Only**`); 
+     if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send(`** You don't have Premissions!**`);
+     if(!message.guild.member(client.user).hasPermission('MANAGE_GUILD')) return message.channel.send(`**I don't have Permission!**`);
+    let args = message.content.split(" ").slice(1)
+    let messagecount = parseInt(args);
+    if (args > 100) return message.reply(`** The number can't be more than **100** .**`).then(messages => messages.delete(5000))
+    if(!messagecount) args = '100';
+    message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages)).then(msgs => {
+    message.channel.send(`** Done , Deleted `${msgs.size}` messages.**`).then(messages => messages.delete(5000));
+    })
+  }
+});
  
 client.login(process.env.TOKEN);
