@@ -36,7 +36,7 @@ client.on('message',message=>{
         if(message.channel.type == 'dm') return;
         if(message.author.bot) return;
         if(!message.member.hasPermission('MANAGE_CHANNELS')) return  message.reply(`**MANAGE_CHANNELS ليس لديك خاصية** :negative_squared_cross_mark: `)	
-        let everyone = message.guild.roles.cache.find(king => king.name === '@everyone');
+        let everyone = message.guild.roles.find(king => king.name === '@everyone');
         message.channel.createOverwrite(everyone, {
                SEND_MESSAGES: false
             }).then(() => {
@@ -50,7 +50,7 @@ client.on('message',message=>{
             if(message.channel.type == 'dm') return 
             if(message.author.bot) return;
             if(!message.member.hasPermission('MANAGE_CHANNELS')) return  message.reply(`**MANAGE_CHANNELS ليس لديك خاصية** :negative_squared_cross_mark: `)	
-            let everyone = message.guild.roles.cache.find(king => king.name === '@everyone');
+            let everyone = message.guild.roles.find(king => king.name === '@everyone');
             message.channel.createOverwrite(everyone, {
                 SEND_MESSAGES: true
              }).then(() => {
