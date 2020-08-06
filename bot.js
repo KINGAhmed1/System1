@@ -31,26 +31,35 @@ client.on('ready', () => {
 client.user.setActivity('!help', { type: 'PLAYING' })
 });
 
-if (message.content.startsWith(prefix + "warn")) {
-    if (!message.channel.guild)
-      return message.channel
-        .send("THISC  COMMAND IS ONLY FOR SERVERS")
-        .then(m => m.delete(7000));
-    if (!message.member.hasPermission("MANAGE_MESSAGES"))
-      return message.channel.send("sorry but u dont have ``MANAGE_MESSAGES`` prems");
-  let user = message.guild.members.get(message.content.split(' ')[1]) || message.mentions.members.first();
-    let warn = new Discord.RichEmbed()
-.setFooter(`WARNED By ${message.author.tag}`,`${message.author.avatarURL}`)   
-.setAuthor('Warn', 'https://cdn3.iconfinder.com/data/icons/musthave/256/Delete.png')
-.setThumbnail(user.avatarURL)
-      .setDescription(` resson :  **${args.join("  ")}**`)
-      .setColor(RANDOM);
-    user.sendEmbed(warn);
-    message.delete();
-    message.channel.send("**Done **")
-  }
-});
-//by ! Angel,  H2#7353 
-//في حال لم ترد ان تحذف رساله الشخص الذي يعطي الوارن فقط قم بحذف   message.delete();
+client.on('message',message=>{
+    if(message.content.startsWith(prefix + 'قفل')){
+        if(message.channel.type == 'dm') return;
+        if(message.author.bot) return;
+        if(!message.member.hasPermission('MANAGE_CHANNELS')) return  message.reply(`**MANAGE_CHANNELS ليس لديك خاصية** :negative_squared_cross_mark: `)	
+        let everyone = message.guild.roles.cache.find(king => king.name === '@everyone');
+        message.channel.createOverwrite(everyone, {
+               SEND_MESSAGES: false
+            }).then(() => {
+                message.channel.send("** ✅ | تم  **").then(msg=>{
+                    msg.delete({timeout : 2000})
+                    message.delete({timeout : 2000})
+                })
+            });
+    }
+        if(message.content.startsWith(prefix + 'فتح')){
+            if(message.channel.type == 'dm') return 
+            if(message.author.bot) return;
+            if(!message.member.hasPermission('MANAGE_CHANNELS')) return  message.reply(`**MANAGE_CHANNELS ليس لديك خاصية** :negative_squared_cross_mark: `)	
+            let everyone = message.guild.roles.cache.find(king => king.name === '@everyone');
+            message.channel.createOverwrite(everyone, {
+                SEND_MESSAGES: true
+             }).then(() => {
+                 message.channel.send("** ✅ | تم  **").then(msg=>{
+                    msg.delete({timeout : 2000})
+                    message.delete({timeout : 2000})
+                })
+             }); 
+        }
+})
  
 client.login(process.env.TOKEN);
