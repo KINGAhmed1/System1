@@ -63,7 +63,7 @@ client.on("message", message => {
 	let avt = `${message.author.avatarURL}`;
   let args = message.content.split(" ")
 	if(message.guild) return;
-    if (message.content == prefix + "user"){
+    if (message.content == - + "user"){
       let member = message.author || message.mentions.members.first() 
 			let embed = new Discord.MessageEmbed() 
 .addField(`**Username :**`,`n ${member.tag}`)
@@ -82,6 +82,9 @@ return message.channel.send(embed);
 });
 
 client.on('ready', () => {// افنت التشغيل 
+	console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+console.log('         [Rainbow Work .. ]       ')
+console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
   setInterval(function(){
       client.guilds.forEach(g => { 
                   var role = g.roles.find('Rainbow', 'اسم لرتبه الي تبي يغير لونها');
