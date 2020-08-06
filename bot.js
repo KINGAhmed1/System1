@@ -643,4 +643,4 @@ message.channel.send('تم الالغاء بنجاح') //OMAR#6356
 
  
  
-client.login('Your Token');
+client.login(process.env.TOKEN);
