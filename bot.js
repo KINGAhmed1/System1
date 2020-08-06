@@ -220,5 +220,73 @@ client.on("message", async function (message) {
   }
   }
 });
+
+client.on('message', message => {
+  if(message.content.split(' ')[0] == `${prefix}kick`){
+  if(!message.guild || message.author.bot) return undefined;
+      if(!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(':no_entry: | لا تمتلك صلاحية طرد الاعضاء!');
+      if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return message.channel.send(':no_entry: | انا لا امتلك صلاحية طرد الاعضاء!');
+      let args = message.content.split(" ").slice(1);
+      let user = message.guild.members.get(message.content.split(' ')[1]) || message.mentions.members.first();
+      let reason = message.content.split(" ").slice(2).join(" ");
+      if(!user) return message.channel.send("نرجوا اتباع التنسيق الاتي: ogkick @Name والسبب");
+      if(!reason) reason = 'No reason provided.';
+      if(user.user.id === message.author.id) return message.channel.send(':no_entry: | لماذا تريد طرد نفسك؟');
+      if(user.user.id === message.guild.owner.id) return message.channel.send(':no_entry: | محاولة فاشلة جميلة :3');
+      if(message.guild.member(user.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:no_entry: | لا يمكنك طرد **${user.user.username}** لأن رتبته اعلي منك!`);
+      if(message.guild.member(user.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`:no_entry: | لا يمكنني طرد **${user.user.username}** لأن رتبته اعلي من رتبتي!`);
+      if(!message.guild.member(user.user).kickable) return message.channel.send(`:no_entry: | لا يمكنني طرد **${user.user.username}** `);
+      if(message.guild.member(user.user).hasPermission('MANAGE_GUILD')) return message.channel.send(`:no_entry: | لا يمكننك طرد **${user.user.username}** لأنه يمتلك رتبة عالية!`);
+      message.guild.member(user).kick(reason, user);
+      message.channel.send(`:white_check_mark: | تم بنجاح طرد ${user.user.username} من السيرفر! :airplane: ``${reason}```);
+    }
+});
+
+client.on("message",message => {
+if(message.author.bot) return;
+if(!message.content.startsWith(prefix)) return;
+  if(message.content.startsWith(prefix + "avatar")){
+const mention = message.mentions.users.first()
+
+if(!mention) return console.log("") 
+let embed = new Discord.RichEmbed()
+.setColor("BLACK")
+.setAuthor(`${mention.username}#${mention.discriminator}`,`${mention.avatarURL}`) 
+.setTitle("Avatar Link")
+.setURL(`${mention.avatarURL}`)
+.setImage(`${mention.avatarURL}`)
+.setFooter(`Requested By ${message.author.tag}`,`${message.author.avatarURL}`)    
+    message.channel.send(embed)
+}
+})
+
+client.on("message", message => {
+  if(message.author.bot) return;
+  if(!message.content.startsWith(prefix)) return;
+  if(message.content.startsWith(prefix + "avatar server")) {
+    let doma = new Discord.RichEmbed()
+    .setColor("BLACK")
+    .setAuthor(message.guild.name, message.guild.iconURL)
+    .setTitle("Avatar Link")
+    .setURL(message.guild.iconURL)
+    .setImage(message.guild.iconURL)
+    .setFooter(`Requested By ${message.author.tag}`, message.author.avatarURL)
+    message.channel.send(doma)
+  } else if(message.content.startsWith(prefix + "avatar")) {
+    let args = message.content.split(" ")[1]
+var avt = args || message.author.id;    
+    client.fetchUser(avt).then(user => {
+     avt = user;
+  let embed = new Discord.RichEmbed() 
+  .setColor("BLACK")
+  .setAuthor(`${avt.tag}`, avt.avatarURL)
+  .setTitle("Avatar Link")
+  .setURL(avt.avatarURL)
+  .setImage(avt.avatarURL)
+  .setFooter(`Requested By ${message.author.tag}`, message.author.avatarURL)
+  message.channel.send(embed) 
+    })
+  }
+})
  
 client.login(process.env.TOKEN);
