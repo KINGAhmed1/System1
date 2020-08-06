@@ -21,11 +21,11 @@ client.on('ready', () => {
   console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
   console.log('[        info         ]')
   console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
-  console.log(`servers! [ " ${client.guilds.cache.size} " ]`);
+  console.log(`servers! [ " ${client.guilds.size} " ]`);
   console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
-  console.log(`Users! [ " ${client.users.cache.size} " ]`);
+  console.log(`Users! [ " ${client.users.size} " ]`);
   console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
-  console.log(`channels! [ " ${client.channels.cache.size} " ]`);
+  console.log(`channels! [ " ${client.channels.size} " ]`);
   console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
  
 client.user.setActivity('!help', { type: 'PLAYING' })
