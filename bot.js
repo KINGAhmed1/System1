@@ -314,21 +314,72 @@ client.on('message', message => {
                         })
                       }
                       });
-                      
-                      client.on('message', message => {  
-    if (message.author.bot) return; 
-    if (message.content.startsWith(prefix + 'clear')) { 
-    if(!message.channel.guild) return message.reply(`** This Command For Servers Only**`); 
-     if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send(`** You don't have Premissions!**`);
-     if(!message.guild.member(client.user).hasPermission('MANAGE_GUILD')) return message.channel.send(`**I don't have Permission!**`);
-    let args = message.content.split(" ").slice(1)
-    let messagecount = parseInt(args);
-    if (args > 100) return message.reply(`** The number can't be more than **100** .**`).then(messages => messages.delete(5000))
-    if(!messagecount) args = '100';
-    message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages)).then(msgs => {
-    message.channel.send(`** Done , Deleted `${msgs.size}` messages.**`).then(messages => messages.delete(5000));
+
+client.on('message', message => {                      
+    if(!message.channel.guild) return;
+       if(message.content.startsWith(prefix + 'new')) {
+
+     if(message.guild
+      .member (message.author)
+      .roles.find ("name" , "V")) return;
+      let num = Math.floor((Math.random() * 4783) + 10);
+   
+      //Shady Craft YT#4176
+
+message.channel.send(`يرجاء كتابة الرقم التالي: **${num}**`).then(m => {
+        
+//Shady Craft YT#4176
+message.channel.awaitMessages(res => res.content == `${num}`, {
+          max: 1,
+          time: 60000,
+          errors: ['time'],
+        }).then(collected => {
+          
+          //Shady Craft YT#4176
+
+message.member.addRole(message.guild.roles.find(c => c.name == "V"));
+        
+    message.guild
+      .createChannel(`ticket-${message.author.id}`, "text")
+      .then(c => {
+        let role = message.guild.roles.find("name", "support");
+        let role2 = message.guild.roles.find("name", "@everyone");
+        let role3 = message.guild.roles.find("name", "support new");
+        c.overwritePermissions(role, {
+          SEND_MESSAGES: true,
+          READ_MESSAGES: true
+        });
+        c.overwritePermissions(role2, {
+          SEND_MESSAGES: false,
+          READ_MESSAGES: false
+        });
+        c.overwritePermissions(message.author, {
+          SEND_MESSAGES: true,
+          READ_MESSAGES: true
+        });
+        c.overwritePermissions(role3, {
+          SEND_MESSAGES: true,
+          READ_MESSAGES: true
+        });
+        
+      
+        const embed = new Discord.RichEmbed()
+          .setColor(0xcf40fa)
+          .addField(
+            `Hey ${message.author.username}!`,
+            `اهلا وسهلا انتظر السبورت يجو يساعدوك اكتب مشكلتك`
+          )
+          .setTimestamp();
+        c.send({
+          embed: embed
+        })
     })
-  }
-});
+        })
+      })
+       }
+  
+      
+        });
+                      
  
 client.login(process.env.TOKEN);
