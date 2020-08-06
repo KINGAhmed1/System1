@@ -37,7 +37,7 @@ client.on('message',message=>{
         if(message.author.bot) return;
         if(!message.member.hasPermission('MANAGE_CHANNELS')) return  message.reply(`**MANAGE_CHANNELS ليس لديك خاصية** :negative_squared_cross_mark: `)	
         let everyone = message.guild.roles.find(king => king.name === '@everyone');
-        message.channel.createOverwrite(everyone, {
+        message.channel.create(everyone, {
                SEND_MESSAGES: false
             }).then(() => {
                 message.channel.send("** ✅ | تم  **").then(msg=>{
@@ -51,7 +51,7 @@ client.on('message',message=>{
             if(message.author.bot) return;
             if(!message.member.hasPermission('MANAGE_CHANNELS')) return  message.reply(`**MANAGE_CHANNELS ليس لديك خاصية** :negative_squared_cross_mark: `)	
             let everyone = message.guild.roles.find(king => king.name === '@everyone');
-            message.channel.createOverwrite(everyone, {
+            message.channel.create(everyone, {
                 SEND_MESSAGES: true
              }).then(() => {
                  message.channel.send("** ✅ | تم  **").then(msg=>{
