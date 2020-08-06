@@ -52,7 +52,5 @@ if (message.content.startsWith(prefix + "warn")) {
 });
 //by ! Angel,  H2#7353 
 //في حال لم ترد ان تحذف رساله الشخص الذي يعطي الوارن فقط قم بحذف   message.delete();
-
- 
  
 client.login(process.env.TOKEN);
