@@ -315,71 +315,113 @@ client.on('message', message => {
                       }
                       });
 
-client.on('message', message => {                      
-    if(!message.channel.guild) return;
-       if(message.content.startsWith(prefix + 'new')) {
 
-     if(message.guild
-      .member (message.author)
-      .roles.find ("name" , "V")) return;
-      let num = Math.floor((Math.random() * 4783) + 10);
-   
-      //Shady Craft YT#4176
 
-message.channel.send(`يرجاء كتابة الرقم التالي: **${num}**`).then(m => {
-        
-//Shady Craft YT#4176
-message.channel.awaitMessages(res => res.content == `${num}`, {
-          max: 1,
-          time: 60000,
-          errors: ['time'],
-        }).then(collected => {
-          
-          //Shady Craft YT#4176
+const MC = JSON.parse(fs.readFileSync("./MC.json", "utf8"));//تحديد الروم
+client.on("message", message => {
+   if (message.author.bot) return;
+  if (!message.channel.guild) return;
+  if (message.content.startsWith(prefix + "setroom")) {
+    
+    let args = message.content.split(" ").slice(1);
+    let args1 = message.content.split(" ").slice(2);
+    if (!message.member.hasPermission("MANAGE_GUILD"))
+      return message.channel.send(
+        ":information_source: | **لا تملك الصلاحيات الكافيه**"
+      );
+    let room = args[0];
+    if (!room) return message.reply("**عذرا لم يتم تحديد الروم**");
+    //جميع الحقوق لدى محمد / مي كودز
+    let link = args[1];
+    if (!link) return message.reply("**عذرا لم يتم تحديد الرابط**");
+    if (!message.guild.channels.find("name", args[0]))
+      return message.reply("**عذرا لم يتم تعرف على الروم**");
+    let embed = new Discord.RichEmbed()
+      .setTitle("**تم الاعداد بنجاح**")
+      .addField("الروم:", room)
+      .addField("رابط الخط:", link)
+      .addField("بواسطة:", `${message.author}`)
+      .setThumbnail(link)
+      .setFooter(`By M7MD <MeCodes/>`);
+    message.channel.sendEmbed(embed);
+    MC[message.guild.id] = {
+      channel: room,
+      link: link,
+      onoff: "شغال"
+    };
+    fs.writeFile("./MC.json", JSON.stringify(MC), err => {
+      if (err) console.error(err);
+    });
+  }
+}); //جميع الحقوق لدى محمد / مي كودز
 
-message.member.addRole(message.guild.roles.find(c => c.name == "V"));
-        
-    message.guild
-      .createChannel(`ticket-${message.author.id}`, "text")
-      .then(c => {
-        let role = message.guild.roles.find("name", "support");
-        let role2 = message.guild.roles.find("name", "@everyone");
-        let role3 = message.guild.roles.find("name", "support new");
-        c.overwritePermissions(role, {
-          SEND_MESSAGES: true,
-          READ_MESSAGES: true
-        });
-        c.overwritePermissions(role2, {
-          SEND_MESSAGES: false,
-          READ_MESSAGES: false
-        });
-        c.overwritePermissions(message.author, {
-          SEND_MESSAGES: true,
-          READ_MESSAGES: true
-        });
-        c.overwritePermissions(role3, {
-          SEND_MESSAGES: true,
-          READ_MESSAGES: true
-        });
-        
-      
-        const embed = new Discord.RichEmbed()
-          .setColor(0xcf40fa)
-          .addField(
-            `Hey ${message.author.username}!`,
-            `اهلا وسهلا انتظر السبورت يجو يساعدوك اكتب مشكلتك`
-          )
-          .setTimestamp();
-        c.send({
-          embed: embed
-        })
-    })
-        })
-      })
-       }
-  
-      
-        });
+//تفعيل الروم او الغائه
+client.on("message", message => {
+   if (message.author.bot) return;
+  if (!message.channel.guild) return;
+  if (message.content.startsWith(prefix + "room")) {
+    if (!message.channel.guild) return;
+//جميع الحقوق لدى محمد / مي كودز
+    if (!message.channel.guild) return;
+    if (!message.member.hasPermission("MANAGE_GUILD"))
+      return message.channel.send("*عذرا انت لا تمتلك صلاحيات* `MANAGE_GUILD`");
+    if (!MC[message.guild.id])
+      MC[message.guild.id] = {
+        onoff: "طافي"
+      };
+    if (MC[message.guild.id].onoff === "طافي")
+      return [
+        message.channel.send(`**تم  تفعيل روم صور**`),
+        (MC[message.guild.id].onoff = "شغال")
+      ];
+    if (MC[message.guild.id].onoff === "شغال")
+      return [
+        message.channel.send(`**تم الغاء تفعيل روم الصور**`),
+        (MC[message.guild.id].onoff = "طافي")
+      ];
+    fs.writeFile("./MC.json", JSON.stringify(MC), err => {
+      if (err) console.error(err);
+    });
+  }
+});
+
+
+client.on("message", message => {
+   if (message.author.bot) return;
+  if (!message.channel.guild) return;
+  if (message.content.startsWith(prefix + "inforoom")) {//امر تشوف اذا الروم شغال ولا لا
+    let embed = new Discord.RichEmbed()
+      .addField("حالة الروم", `${MC[message.guild.id].onoff}`)
+      .addField("روم الخط", `${MC[message.guild.id].channel}`)
+      .addField("بواسطة", `${message.author}`)
+      .setThumbnail(`https://cdn.discordapp.com/icons/589156112448749589/859edaa2f30924ba1d5cba2018986922.gif?size=1024`)
+      .setFooter(`By M7MD <MeCodes/>`);
+    message.channel.sendEmbed(embed);
+  }
+});
+
+
+//لاتلعب هنا
+client.on("message", message => {
+   if (message.author.bot) return;
+  if (!message.channel.guild) return;
+  if (!MC[message.guild.id])
+    MC[message.guild.id] = {
+      onoff: "طافي"
+    };
+  if (MC[message.guild.id].onoff === "طافي") return;
+
+  if (
+    !MC[message.guild.id] ||
+    !MC[message.guild.id].channel ||
+    !MC[message.guild.id].link ||
+    !MC[message.guild.id].onoff
+  )
+    return;
+  if (message.channel.name !== `${MC[message.guild.id].channel}`) return;
+  message.channel.send(MC[message.guild.id].link);
+}); //جميع الحقوق لدى محمد / مي كودز
+
 
 
                       
