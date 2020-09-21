@@ -221,7 +221,6 @@ client.on("message", async function (message) {
   }
 });
 
-let prefix = "-"; // bot prefix
 
 client.on("message", async (message)=>{
 if(message.author.bot || !message.guild || !message.content.startsWith(prefix))return;
