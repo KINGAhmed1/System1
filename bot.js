@@ -221,25 +221,26 @@ client.on("message", async function (message) {
   }
 });
 
-client.on('message', message => {
-  if(message.content.split(' ')[0] == `${prefix}kick`){
-  if(!message.guild || message.author.bot) return undefined;
-      if(!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(':no_entry: | لا تمتلك صلاحية طرد الاعضاء!');
-      if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return message.channel.send(':no_entry: | انا لا امتلك صلاحية طرد الاعضاء!');
-      let args = message.content.split(" ").slice(1);
-      let user = message.guild.members.get(message.content.split(' ')[1]) || message.mentions.members.first();
-      let reason = message.content.split(" ").slice(2).join(" ");
-      if(!user) return message.channel.send("نرجوا اتباع التنسيق الاتي: ogkick @Name والسبب");
-      if(!reason) reason = 'No reason provided.';
-      if(user.user.id === message.author.id) return message.channel.send(':no_entry: | لماذا تريد طرد نفسك؟');
-      if(user.user.id === message.guild.owner.id) return message.channel.send(':no_entry: | محاولة فاشلة جميلة :3');
-      if(message.guild.member(user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:no_entry: | لا يمكنك طرد **${user.username}** لأن رتبته اعلي منك!`);
-      if(message.guild.member(user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`:no_entry: | لا يمكنني طرد **${user.username}** لأن رتبته اعلي من رتبتي!`);
-      if(!message.guild.member(user).kickable) return message.channel.send(`:no_entry: | لا يمكنني طرد **${user.use.username}** `);
-      if(message.guild.member(user).hasPermission('MANAGE_GUILD')) return message.channel.send(`:no_entry: | لا يمكننك طرد **${user.username}** لأنه يمتلك رتبة عالية!`);
-      message.guild.member(user).kick(reason, user);
-      message.channel.send(`:white_check_mark: | تم بنجاح طرد ${user.username} من السيرفر! :airplane: ``${reason}```);
-    }
+let prefix = "-"; // bot prefix
+
+client.on("message", async (message)=>{
+if(message.author.bot || !message.guild || !message.content.startsWith(prefix))return;
+const args = message.content.slice(prefix.length).trim().split(/ +/), commandName = args.shift().toLowerCase();
+if(["ban", "kick"].includes(commandName)){
+let mode = commandName;
+if(!message.member.hasPermission(mode=="kick"?"KICK_MEMBERS":"BAN_MEMBERS")) return message.channel.send("**❌ | You don't have Permissions do to this.**");
+let user = message.guild.member(message.mentions.users.first() || message.guild.members.cache.find(x=> x.id == args[0]));
+if(!user)return message.channel.send("**❌ | Member not found!**");
+let bot = message.guild.member(client.user);
+if (user.user.id == client.user.id) return message.channel.send("lol no");
+if (user.user.id == message.guild.owner.id) return message.channel.send(`**:x: | You can't ${mode} the owner!**`);
+if (user.roles.highest.position >= message.member.roles.highest.position && message.author.id !== message.guild.ownerID) return message.channel.send(`**:x: | You can't ${mode} people higher ranked than yourself!**`);
+if (user.roles.highest.position >= bot.roles.highest.position)return message.channel.send(`**:x: | I can't ${mode} people who are higher ranked than me!**`);
+if (!user[`${mode == "ban" ? "bann" : mode}able`])return message.channel.send(`**:x: | Specified user is not ${mode}able.**`);
+user[mode](mode == "ban" ? {days:7,reason:`Banned by ${message.author.tag}`}:`Kicked by ${message.author.tag}`)
+.then(()=>message.channel.send(`**✅ ${mode == "ban" ? "Bann" : mode}ed __${user.user.tag}__ (ID: \`${user.user.id}\`)**`))
+.catch(console.error);
+}
 });
 
 client.on("message",message => {
