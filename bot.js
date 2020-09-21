@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const prefix = "-"
  
 console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
-console.log('         [Wait please .. ]       ')
+console.log('         [Wait please ... ]       ')
 console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
 client.on('ready', () => {
     console.log('')
