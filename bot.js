@@ -450,6 +450,38 @@ message.channel.send(embed);
 }
 });
 
+client.on('guildMemberAdd', (member) => {
+        const welcomer = member.guild.channels.cache.find(
+            (d) => d.name == '・❱-الشات-العام'
+        );
+        if (!welcomer) return;
+        if (welcomer) {
+            moment.locale('en');
+            var m = member.user;
+		
+            member.guild.fetchInvites().then((guildInvites) => {
+                setTimeout(() => {
+                    const invite = guildInvites.find((i) => i.uses);
+ 
+                    let embed = new Discord.MessageEmbed()
+                        .setAuthor(member.tag, member.user.avatarURL())
+                        .setTitle('**New Member Join**')
+                        .setThumbnail(member.user.avatarURL())
+                        .setTimestamp()
+                        .setDescription(
+                            `Member: ${member}\nInviter: <@${
+                                invite.inviter.id
+                            }>\nUrl: https://discord.gg/${invite.code}\nAge: ${moment(
+                                member.user.createdTimestamp
+                            ).fromNow()}`
+                        );
+ 
+                    welcomer.send(embed);
+                }, 2000);
+            });
+        }
+});
+
 
                       
  
