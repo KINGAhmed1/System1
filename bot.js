@@ -451,7 +451,7 @@ message.channel.send(embed);
 });
 
 client.on('guildMemberAdd', (member) => {
-        const welcomer = member.guild.channels.cache.find(
+        const welcomer = member.guild.channels.find(
             (d) => d.name == '・❱-الشات-العام'
         );
         if (!welcomer) return;
