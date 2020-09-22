@@ -422,102 +422,32 @@ client.on("message", message => {
   message.channel.send(MC[message.guild.id].link);
 }); //جميع الحقوق لدى محمد / مي كودز
 
-client.on("message", MeCodes => {
-  if (MeCodes.content === prefix + "cmessage") {
-    if (!MeCodes.member.hasPermission("MANAGE_CHANNLES"))
-      return MeCodes.reply("ليس لديك صلاحيات");
-    let m7md = MeCodes.guild.roles.find("name", "Owner"); //اسم رتبه الاداره واذا تبي اكثر من رتبه منشني في شات السبوورت
-    MeCodes.channel
-      .overwritePermissions(m7md, {
-        MANAGE_MESSAGES: false
-      })
-      .then(() => {
-        MeCodes.channel.send(
-          `__**MeCodes  \n \`Loading...\`\n <@${MeCodes.member.id}>**__`
-        )
-        .then(message => {
-      message.edit( `__**تم منع مسح الرسائل في هاذا الشات \n <@${MeCodes.member.id}>**__`);
-       MeCodes.react("⛔");
-      });
-        });
-  }
-  if (MeCodes.content === prefix + "omessage") {
-    if (!MeCodes.channel.guild)
-      return MeCodes.reply(" هذا الامر فقط للسيرفرات !!");
 
-    if (!MeCodes.member.hasPermission("MANAGE_CHANNLES"))
-      return MeCodes.reply("ليس لديك صلاحيات");
-    let m7md = MeCodes.guild.roles.find("name", "Owner"); //اسم رتبه الاداره واذا تبي اكثر من رتبه منشني في شات السبوور
-     MeCodes.channel.overwritePermissions(m7md, {
-        MANAGE_MESSAGES: true
-      })
-      .then(() => {
-        MeCodes.channel.send(
-          `__**MeCodes  \n \`Loading...\`\n <@${MeCodes.member.id}>**__`
-        )
-        .then(message => {
-      message.edit( `__**تم سماح مسح الرسائل في هاذا الشات \n <@${MeCodes.member.id}>**__`);
-        MeCodes.react("✅");
-      });
-        });
-  }
-}); //ME Codes == ! Ve,𝐌𝟕𝐌𝐃#0222
 
-const m7 = JSON.parse(fs.readFileSync("./m7.json", "utf8"));
+
+
 client.on("message", message => {
-  if (!message.channel.guild) return;
-  if (message.content.startsWith(prefix + "setroom1")) {
-    let args = message.content.split(" ").slice(1);
-    if (!message.channel.guild)
-      return message.reply("**هذا الأمر فقط للسيرفرات**");
-    if (!message.member.hasPermission("MANAGE_GUILD"))
-      return message.channel.send(
-        ":information_source: | **لا تملك الصلاحيات الكافيه**"
-      );
-    let room = args[0];
-    if (!room) return message.reply("**اكتب اسم الروم**");
-    if (!message.guild.channels.find("name", args[0]))
-      return message.reply("**لا يمكنني اجاد الروم**");
-    let embed = new Discord.RichEmbed()
-      .setTitle("**تم الاعداد بنجاح**")
-      .addField("الروم:", room)
-      .addField("بواسطة:", `${message.author}`)
-      .addField(
-        "Time now: ",
-        `${moment(message.createdAt).format(" D/MM/YYYY h:mm")}`
-      )
-      .setThumbnail(message.author.avatarURL)
-      .setFooter(`${client.user.username}`);
-    message.channel.sendEmbed(embed);
-    m7[message.guild.id] = {
-      channel: room
-    };
-    fs.writeFile("./m7.json", JSON.stringify(m7), err => {
-      if (err) console.error(err);
-    });
-    } else {
-      client.on('guildMemberAdd', member => {
-  member.guild.fetchInvites().then(guildInvites => {
-    const gamer = invites[member.guild.id];
-    invites[member.guild.id] = guildInvites;
-    const invite = guildInvites.find(i => gamer.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-      let findchannel = member.guild.channels.find(
-        "name",
-        `${m7[message.guild.id].channel}`
-      );
-      findchannel
-        .send(` join ${member} invited by ${inviter}   (  ${invite.uses} invites )  `)
-        .catch(err => {
-          message.reply(`**انا لا اجد الروم**`);
-          console.error(err);
-        });
-     });
-    }
- );
- }
-   });
+     const args = message.content.split(' ');
+    let avt = `${message.author.avatarURL}`;
+    let id1 = `https://images-ext-1.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif`
+    if(message.guild.channel) return;
+                 if (message.content === (prefix + 'user') || message.content === (prefix + "u")) {
+const mention = message.mentions.users.first() || message.author;
+            let embed = new Discord.RichEmbed() 
+.addField(`**Username :**`,`\n ${mention.tag}`)
 
+.addField('**User ID :**', `\n${mention.id}`)
+
+.addField('**User Created At :**', `\n${moment(mention.createdTimestamp).format('YYYY/MM/DD HH:mm')}`)
+
+.addField('**User Joined At :**', `\n${moment(mention.joinedTimestamp).format('YYYY/MM/DD HH:mm')}`)
+
+.setThumbnail(`${mention.avatarURL}` , ({format : "png" , dynamic : true , size : "1024"}))
+.setFooter(`${mention.tag}`,`${id1}`)
+
+message.channel.send(embed);
+}
+});
 
 
                       
