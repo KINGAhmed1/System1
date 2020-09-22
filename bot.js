@@ -450,36 +450,94 @@ message.channel.send(embed);
 }
 });
 
-client.on('guildMemberAdd', (member) => {
-        const welcomer = member.guild.channels.find(
-            (d) => d.name == '・❱-الشات-العام'
-        );
-        if (!welcomer) return;
-        if (welcomer) {
-            moment.locale('en');
-            var m = member.user;
-		
-            member.guild.fetchInvites().then((guildInvites) => {
-                setTimeout(() => {
-                    const invite = guildInvites.find((i) => i.uses);
+client.on('message', message => {
  
-                    let embed = new Discord.MessageEmbed()
-                        .setAuthor(member.tag, member.user.avatarURL())
-                        .setTitle('**New Member Join**')
-                        .setThumbnail(member.user.avatarURL())
-                        .setTimestamp()
-                        .setDescription(
-                            `Member: ${member}\nInviter: <@${
-                                invite.inviter.id
-                            }>\nUrl: https://discord.gg/${invite.code}\nAge: ${moment(
-                                member.user.createdTimestamp
-                            ).fromNow()}`
-                        );
- 
-                    welcomer.send(embed);
-                }, 2000);
-            });
+    if(message.content.startsWith(prefix + 'rep')) {
+      if(!message.channel.guild) return;
+                    moment.locale('en');
+                  var getvalueof = message.mentions.users.first()
+                    if(!getvalueof) return message.channel.send(`**:mag: |  ${message.author.username}, the user could not be found.    **`);
+                       if(getvalueof.id == message.author.id) return message.channel.send(`**${message.author.username}, you cant give yourself a reputation !**`)
+    if(profile[message.author.id].reps != moment().format('L')) {
+            profile[message.author.id].reps = moment().format('L');
+            profile[getvalueof.id].rep = Math.floor(profile[getvalueof.id].rep+1);
+         message.channel.send(`** :up:  |  ${message.author.username} has given ${getvalueof} a reputation point!**`)
+        } else {
+         message.channel.send(`**:stopwatch: |  ${message.author.username}, you can raward more reputation  ${moment().endOf('day').fromNow()} **`)
         }
+       }
+       fs.writeFile('profile.json', JSON.stringify(profile), (err) => {
+if (err) console.error(err);
+})
+});
+
+client.on('message', message => {  
+    if (message.author.bot) return;
+if (message.content.startsWith(prefix + 'clear')) { //Codes
+    if(!message.channel.guild) return message.reply('⛔ | This Command For Servers Only!'); 
+        if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('⛔ | You dont have **MANAGE_MESSAGES** Permission!');
+        if(!message.guild.member(client.user).hasPermission('MANAGE_MESSAGES')) return message.channel.send('⛔ | I dont have **MANAGE_MESSAGES** Permission!');
+ let args = message.content.split(" ").slice(1)
+    let messagecount = parseInt(args);
+    if (args > 99) return message.reply("**🛑 || يجب ان يكون عدد المسح أقل من 100 .**").then(messages => messages.delete(5000))
+    if(!messagecount) args = '100';
+    message.channel.fetchMessages({limit: messagecount + 1}).then(messages => message.channel.bulkDelete(messages));
+    message.channel.send(`\`${args}\` : __عدد الرسائل التي تم مسحها __ `).then(messages => messages.delete(5000));
+  }
+  });
+
+client.on('message' , message => {
+  if(message.author.bot) return;
+  if(message.content.startsWith(prefix + "ping")) {
+ message.channel.send('Pong...').then((msg) => {
+      msg.edit(`\`\`\`javascript\nTime taken: ${msg.createdTimestamp - message.createdTimestamp} ms.\nDiscord API: ${Math.round(client.ping)} ms.\`\`\``);//حقوق دايموند كودز
+ })
+  }  
+ });
+
+client.on('message', message => {
+    let filter = m => m.author.id === message.author.id;
+    let www = message.guild.channels.find(`name`, "polls");
+    if(message.content.startsWith(prefix + "poll")) {
+        message.reply('A').then(m => m.delete(3000));
+        let bi;    
+        message.channel.awaitMessages(filter, { //???? ???????#2824
+ 
+            max: 1,
+ 
+            time: 90000,
+ 
+            errors: ['time']
+ 
+          })
+          .then(collected => {
+              collected.first().delete();
+              bi = collected.first().content;
+    message.reply('B').then(m => m.delete(3000));
+    let wi;
+    message.channel.awaitMessages(filter, { //???? ???????#2824
+ 
+        max: 1,
+ 
+        time: 90000,
+ 
+        errors: ['time']
+ 
+      })
+      .then(collected => {
+          collected.first().delete();
+          wi = collected.first().content;
+var embed = new Discord.RichEmbed()
+.setColor('RED')
+.setTitle('New Poll')
+.setDescription(`A: ${bi}
+B: ${wi}`)
+message.guild.channels.find(r => r.name === "polls").send(embed).then(res => {
+res.react('🇦').then(() => res.react('🇧'));
+});
+      });
+    });
+};
 });
 
 
