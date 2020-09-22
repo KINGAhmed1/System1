@@ -291,33 +291,6 @@ var avt = args || message.author.id;
   }
 })
 
-client.on('message', message => {
-                      if (message.content.startsWith(prefix + 'اسرع')) {
-                        if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
-                      
-                      const type = require('./2sr3.json');
-                      const item = type[Math.floor(Math.random() * type.length)];
-                      const filter = response => {
-                          return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
-                      };
-                      message.channel.send('** لديك 15 ثانيه لكتابه هذه الكلمه بسرعة**').then(msg => {
-                      
-                            
-                      msg.channel.send(`${item.type}`).then(() => {
-                              message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
-                              .then((collected) => {
-                          message.channel.send(`${collected.first().author} ✅ **احسنت لقد تمكنت من كتابه هذه الكلمه بسرعه**`);
-                          console.log(`[Typing] ${collected.first().author} typed the word.`);
-                                })
-                                .catch(collected => {
-                                  message.channel.send(`:x: **لم يتمكن احد من كتابه هذه الكلمه في الوقت المناسب**`);
-                                })
-                          })
-                        })
-                      }
-                      });
-
-
 
 const MC = JSON.parse(fs.readFileSync("./MC.json", "utf8"));//تحديد الروم
 client.on("message", message => {
