@@ -495,35 +495,32 @@ res.react('🇦').then(() => res.react('🇧'));
 };
 });
 
-client.on('message', message => {
-    if (message.content.startsWith("رابط")) {
- 
-  message.channel.createInvite({
-        thing: true,
-        maxUses: 100,
-        maxAge: 86400
-    }).then(invite =>
-      message.author.sendMessage(invite.url)
-    )
-    const embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setDescription("| :white_check_mark:  | :heart:  تم ارسال الرابط على الخاص  ")
-      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
-              const Embed11 = new Discord.RichEmbed()
-        .setColor("RANDOM")
-                .setAuthor(message.guild.name, message.guild.iconURL)
-        .setDescription(`
-**
----------------------
--[${message.guild.name}]  هذا هو رابط سيرفر
----------------------
--هذا الرابط صالح ل 100 مستخدم فقط
----------------------
--هذا الرابط صالح لمده 24 ساعه فقط
----------------------
-**`)
-      message.author.sendEmbed(Embed11)
-    }
+client.on("message", msg => {
+//Shady Craft YT#4176
+  if (msg.author.bot) return;
+//Shady Craft YT#4176
+  if (msg.content === "-links") {//Shady Craft YT#4176
+    client.guilds.forEach(g => {//Shady Craft YT#4176
+      
+      let l = g.id;
+      g.channels
+        .get(g.channels.first().id)
+        .createInvite({//Shady Craft YT#4176
+          maxUses: 10,
+          maxAge: 86400
+        })//Shady Craft YT#4176
+        .then(i =>
+          msg.channel.send(`
+        **
+        اقصى الاستخدام : mem 10
+        رابط السيرفر : <https://discord.gg/${i.code}>
+        السيرفر : ${g.name} | Id : ${g.id}//!P H'                 Kᴶᴷ#2247
+        صاحب السيرفر : ${g.owner} 
+        **
+        `)
+        ); //g.owner.id
+    });
+  }
 });
 
 client.on('message', message => {
