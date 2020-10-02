@@ -758,7 +758,6 @@ client.on('message', msg=>{
 ما حبييت احط حقوقي بالكود بس اذا كتبت علي الكود حقوقك ما بيصير شي حلو ؟ 
 !    Me » Ashour ❤#0018 
 */
-let prefix="-";//Ashour
 client.on("message", message =>{//Ashour
   if(message.content.startsWith(prefix + "credits")){//Ashour
  let user = message.mentions.users.first() || message.author;//Ashour
