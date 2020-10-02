@@ -3,6 +3,7 @@ const fs = require('fs');
 const yt = require('ytdl-core');
 const dateFormat = ("dateformat");
 const ms = require('parse-ms');
+const db = require('quick.db');
 const moment = require('moment');
 const prefix = "-"
 const client = new Discord.Client();
