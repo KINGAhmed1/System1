@@ -655,7 +655,6 @@ client.on("message", message =>{//Ashour
     if (bal === null) bal = 0;//Ashour
       return message.channel.send(`:bank: | **${user.username} , your account balance is** \`\`$${bal}\`\`.`)//Ashour
 }});//Ashour
-const ms = require('parse-ms')//Ashour
 client.on("message", async message =>{//Ashour
 if(message.content.startsWith(prefix + "daily")){//Ashour
     let timeout = 86400000/2 // 12 hours in milliseconds, change if you'd like.
