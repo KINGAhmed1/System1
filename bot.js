@@ -630,7 +630,7 @@ client.on('message',async message => {
 client.on('message', msg=>{
     var prefix = '-';//البريفكس
     let roodx = msg.content.split(" ").slice('1').join(" ")
-    var channelId = msg.guild.channels.cache.find('id','//id channel ')
+    var channelId = msg.guild.channels.cache.find('758303302122995752','//id channel ')
     if(msg.author.bot)return;
     if(msg.content.startsWith(prefix + 'order'))//الامر
    {
