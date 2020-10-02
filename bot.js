@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const yt = require('ytdl-core');
-const db = require("quick.db"); 
 const dateFormat = ("dateformat");
 const moment = require('moment');
 const prefix = "-"
