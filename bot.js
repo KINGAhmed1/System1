@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const yt = require('ytdl-core');
+const db = require("quick.db"); 
+const dateFormat = ("dateformat");
 const moment = require('moment');
 const prefix = "-"
 const client = new Discord.Client();
@@ -552,434 +554,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لي�
  
 });
 
-function commandIs(str, msg){
-    return msg.content.toLowerCase().startsWith('-' + str);
-}
- 
-function pluck(array) {
-    return array.map(function(item) { return item['name']; });
-}
- 
-function hasRole(mem, role) {
-    if(pluck(mem.roles).includes(role)){
-        return true;
-    } else {
-        return false;
-    }
- 
-  }
- 
- 
-var servers = {};
- 
-var q1 = "-quran 1"
- 
-var q2 = "-quran 2"
- 
-var q3 = "-quran 3"
- 
-var q4 = "-quran 4"
- 
-var q5 = "-quran 5"
- 
-var q6 = "-quran 6"
- 
-var q7 = "-quran 7"
- 
-var q8 = "-quran 8"
- 
-var q9 = "-quran 9"
- 
-var q10 = "-quran 10"
- 
-var q11 = "-quran 11"
- 
-var q12 = "-quran 12"
- 
-var q13 = "-quran 13"
- 
-var q14 = "-quran 14"
- 
-var q15 = "-quran 15"
- 
-var q16 = "-quran 16"
- 
-var q17 = "-quran 17"
- 
-var q18 = "-quran 18"
- 
-var q19 = "-quran 19"
- 
-var q20 = "-quran 20"
- 
-var q21 = "-quran 21"
- 
-var q22 = "-quran 22"
- 
-var q23 = "-quran 23"
- 
-var q24 = "-quran 24"
- 
-var q25 = "-quran 25"
- 
- 
-function play(connection, message) {
-    var server = servers[message.guild.id];
- 
-   server.dispatcher = connection.playStream(yt(server.queue[0], { fliter: "audionly" }));
- 
-    server.queue.shift();
- 
-    server.dispatcher.on("end", function() {
-        if (server.queue[0]) play(connection, message);
-        else connection.disconnect();
-    });
-}
- 
-client.on("ready", () => {
-    console.log(`Quran bot is in ${client.guilds.size} servers `)
-});
- 
-client.on("message", message => {
-                        if (message.content === q1 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);  
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=E1Y0pDXNPu8', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-      });
-  }
- 
-                        if (message.content === q2 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=IEC8wi6wpGg', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-      });
-  }
- 
-                            if (message.content === q3 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=cjmh_-4VY9I', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-      });
-  }
- 
-                            if (message.content === q4 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=L0s4ij88LTU', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
-                              if (message.content === q5 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=Je1QLnXRGjE', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
-                                  if (message.content === q6 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=2Q--P6Fxyl0', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
-                                      if (message.content === q7 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=yM-nVWU0wfU', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q8 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=fw2ByWafkV0', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q9 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=tuYP5JktEn0', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q10 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=RGnYiavNAJI', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q11 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=W7KqMe44aGo', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q12 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=hXVqZRX9FUM', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q13 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=Up4iDBOjGU8', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q14 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=YwClCEV1AWA', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q15 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=20-hBBasCGE', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q16 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=E4dbht9oza4', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q17 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=9QhMMkQ_VSg', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q18 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=UerpNxFxg0w', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q19 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=-ulcJ6m0euU', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q20 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`يرجى أن تكون في قناة صوتيه أولا!`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=MMYT9P_OZUo', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q21 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=5OERHMfuI7E', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q22 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=VMSWdncvHqo', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q23 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`يرجى أن تكون في قناة صوتيه أولا!`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=JrNFbjseBcg', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q24 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=9CN-31h_wK4', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
-                                      if (message.content === q25 ) {
-                  message.react('🔊')
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) {
-      return message.reply(`**عزيزي , اذا اردت الإستماع للقرآن الكريم فعليك الدخول لقناة صوتية**`);
-    }
-    voiceChannel.join()
-      .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=vSOl00Y-WDo', {audioonly: true});
-        const dispatcher = connnection.playStream(stream);
-        });
-  }
- 
- 
- 
-  if(message.content === "-stop" ) {
-                var servers = {};
- 
-            if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
- 
-  }
- 
- if(message.content === "server2quran") {
-   message.channel.send(` QuranBot
-شكرا لإستعمال البوت | Thanks You
- `)
- }
- 
- 
-});
+
 
 const developers = ["720115877873451048"] // ايدي صاحب البوت
 client.on('message', message => {
@@ -1040,11 +615,11 @@ client.on("message", message => {
   // مصدر الأذكار موقع
   // https://www.islambook.com/azkar/1/
   // كتابة الكود : AboKhalil
-let romname = "・❱-الشات-العام";
+let romname = "الشات-العام";
  
   let args = message.content.split(" ");
   command = args[0];
-  if (command === `${prefix}startazkar`) {
+  if (command === `-azkar`) {
       if (!message.guild.member(message.author).hasPermission("ADMINISTATOR")) {
         message.channel.send('**يجب ان تكون لديك خاصية `administrator` **');
     } else { 
@@ -1162,11 +737,275 @@ client.on('message',async message => {
   }
 });
 
+client.on('message', msg=>{
+    var prefix = '-';//البريفكس
+    let roodx = msg.content.split(" ").slice('1').join(" ")
+    var channelId = msg.guild.channels.cache.find('id','//id channel ')
+    if(msg.author.bot)return;
+    if(msg.content.startsWith(prefix + 'order'))//الامر
+   {
+     msg.delete()
+ 
+    var roodx1 = new Discord.MessageEmbed()
+    .setTitle(`» طلب جديد من 「${msg.author.username} 」`)
+    .setColor('#811241')//color
+    .setDescription(`${roodx}`)
+    channelId.send(roodx1);
+   }
+  });
+
+/*
+ما حبييت احط حقوقي بالكود بس اذا كتبت علي الكود حقوقك ما بيصير شي حلو ؟ 
+!    Me » Ashour ❤#0018 
+*/
+const db = require('quick.db')//Ashour
+let prefix="-";//Ashour
+client.on("message", message =>{//Ashour
+  if(message.content.startsWith(prefix + "credits")){//Ashour
+ let user = message.mentions.users.first() || message.author;//Ashour
+    let bal = db.fetch(`money_${user.id}`)//Ashour
+    if (bal === null) bal = 0;//Ashour
+      return message.channel.send(`:bank: | **${user.username} , your account balance is** \`\`$${bal}\`\`.`)//Ashour
+}});//Ashour
+const ms = require('parse-ms')//Ashour
+client.on("message", async message =>{//Ashour
+if(message.content.startsWith(prefix + "daily")){//Ashour
+    let timeout = 86400000/2 // 12 hours in milliseconds, change if you'd like.
+  let amount = Math.floor(Math.random() * 1000) + 1;//Ashour
+    let daily = await db.fetch(`daily_${message.author.id}`);//Ashour
+    if (daily !== null && timeout - (Date.now() - daily) > 0) {//Ashour
+        let time = ms(timeout - (Date.now() - daily));//Ashour
+        message.channel.send(`:rolling_eyes: **| ${message.author.username}, your daily credits refreshes in ${time.hours}h ${time.minutes}m ${time.seconds}s .** `)//Ashour
+    } else {
+    message.channel.send(`:moneybag: **${message.author.username}, you got :dollar: ${amount} daily credits!**`)//Ashour
+    db.add(`money_${message.author.id}`, amount)//Ashour
+    db.set(`daily_${message.author.id}`, Date.now())//Ashour
+    }}});//Ashour
+client.on("message", async message =>{//Ashour
+  if(message.content.startsWith(prefix + "trans")){//Ashour
+    let args = message.content.split(" ").slice(2); //Ashour
+    let user = message.mentions.members.first() //Ashour
+    let member = db.fetch(`money_${message.author.id}`)//Ashour
+    if (!user) {//Ashour
+        return message.channel.send(`:rolling_eyes: | ** ${message.author.username}, I Cant Find a User**`)
+    }//Ashour
+    if (!args) {
+        return message.channel.send(`:rolling_eyes: | **${message.author.username}, type the credit you need to transfer!**`)//Ashour
+    }
+    if (message.content.includes('-')) { //Ashour
+      return message.channel.send(`:rolling_eyes: | **${message.author.username}, Type a Amount \`Not Negative\`**`)//Ashour
+    }
+    if (member < args) {//Ashour
+        return message.channel.send(`:thinking: ** | ${message.author.username}, Your balance is not enough for that!**`)//Ashour
+    }
+    if(isNaN(args)) 
+return message.channel.send(`:rolling_eyes: Numbers Only`)//Ashour
+    message.channel.send(`:moneybag: **| ${message.author.username}, has transferred \`$${args}\` to ${user}**`)//Ashour
+    user.send(`:atm:  |  Transfer Receipt \n\`\`\`You have received $${args} from user ${message.author.username} (ID: ${user.id})\`\`\``)//Ashour
+    db.add(`money_${user.id}`, args)//Ashour
+    db.subtract(`money_${message.author.id}`, args)//Ashour
+}});//Ashour
 
 
+client.on("message", async message => {
+  if (!message.guild || message.author.bot) return;
+  var command = message.content.toLowerCase().split(" ")[0];
+  var args = message.content.toLowerCase().split(" ");
+  if (command === `${prefix}user-time`) {
+    if (!message.member.hasPermission(`ADMINISTRATOR`))
+      return message.channel.send(`You need __administrator__ permissions`);
+    if (!message.guild.member(client.user).hasPermission(`ADMINISTRATOR`))
+      return message.channel.send(`I need __administrator__ permissions`);
+    if (!args[1])
+      return message.channel.send(`please send time by days ,\nexemple: 5`);
+    if (isNaN(args[1])) return message.channel.send(`Only Number!`);
+    await db.set(`crt_${message.guild.id}`, args[1]);
+    message.channel.send(`Done`);
+  } else if (command === `${prefix}user-toggle`) {
+    if (!message.member.hasPermission(`ADMINISTRATOR`))
+      return message.channel.send(`You need __administrator__ permissions`);
+    if (!message.guild.member(client.user).hasPermission(`ADMINISTRATOR`))
+      return message.channel.send(`I need __administrator__ permissions`);
+    if (args[1] === `on`) {
+      await db.set(`crr_${message.guild.id}`, args[1]);
+      message.channel.send(`Done , toggle on`);
+    } else if (args[1] === `off`) {
+      await db.set(`crr_${message.guild.id}`, args[1]);
+      message.channel.send(`Done , toggle off`);
+    } else {
+      message.channel.send(`on/off`);
+    }
+  }
+});
+ 
+client.on("guildMemberAdd", async member => {
+  const millis = new Date().getTime() - member.user.createdAt.getTime();
+  const now = new Date();
+  dateFormat(now, "dddd, mmmm dS, yyyy");
+  const days = millis / 1000 / 60 / 60 / 24;
+  dateFormat(now, "dddd, mmmm dS, yyyy");
+  let toggle;
+  if (member.user.bot) return;
+  let time = await db.fetch(`crt_${member.guild.id}`);
+  let onoff = await db.fetch(`crr_${member.guild.id}`);
+  if (!time) return;
+  if (onoff) {
+    toggle = onoff;
+  } else {
+    toggle = "off";
+  }
+  let userCt = days.toFixed(0);
+  if (toggle === `off`) return;
+  if (time > userCt) {
+    member.kick(`Lower time created ${time}`);
+  }
+});
 
 
-
+var top = require("./top.json");
+function save() {
+    fs.writeFileSync("./top.json", JSON.stringify(top, null, 4));
+}
+client.on("voiceStateUpdate", async function(oldMember, newMember) {
+    if (newMember.user.bot) return;
+    if (!top[newMember.guild.id]) top[newMember.guild.id] = {};
+    if (!top[newMember.guild.id][newMember.user.id]) top[newMember.guild.id][newMember.user.id] = {
+        "text": 0,
+        "voice": parseInt(Math.random()*10),
+        "msgs": 0,
+        "id": newMember.user.id
+    }
+    save();
+    if (!oldMember.voiceChannel && newMember.voiceChannel) {
+        var addXP = setInterval(async function () {
+            top[newMember.guild.id][newMember.user.id].voice+=parseInt(Math.random()*4);
+            save();
+            if (!newMember.voiceChannel) {
+                clearInterval(addXP);
+            }
+        }, 60000);
+    }
+});
+client.on("message", async function (message) {
+    if (message.author.bot) return;
+    if (!message.guild) return;
+    if (!top[message.guild.id]) top[message.guild.id] = {};
+    if (!top[message.guild.id][message.author.id]) top[message.guild.id][message.author.id] = {
+        "text": parseInt(Math.random()*10),
+        "voice": 1,
+        "msgs": 0,
+        "id": message.author.id
+    }
+    if (top[message.guild.id][message.author.id].msgs > 10) {
+        top[message.guild.id][message.author.id].text += parseInt(Math.random()*4);
+        top[message.guild.id][message.author.id].msgs = 0;
+    }
+    save();
+    var args = message.content.split(" ");
+    var cmd = args[0].toLowerCase();
+    if (!message.content.startsWith(prefix)) return;
+  if(message.content.startsWith(prefix + "top text")) {
+            var topArray = Object.values(top[message.guild.id]);
+            var num = 0;
+            var textStr = `${topArray.sort((a, b) => b.text - a.text).slice(0, 5).filter(user => user.text > 0 && message.guild.members.get(user.id)).map(function (user) {
+                if (user.text > 0) {
+                    return `**#${++num} | <@${user.id}> XP: \`${user.text}\` **`
+                }
+            }).join("\n")}`;
+            var embed = new Discord.RichEmbed()
+            .setAuthor("?? | Guild Score Leaderboards", message.guild.iconURL)
+  .setColor("13B813")
+        .addField(`**:speech_balloon: | TEXT LEADERBOARD**`, `${textStr}   \n\n\n **? | For More: \`${prefix}top text\`**`, true)  
+        .setFooter(message.author.tag, message.author.displayAvatarURL)
+            .setTimestamp()
+            message.channel.send({
+                embed: embed
+            });
+     //   if (!message.content.startsWith(prefix)) return;
+  } else {
+    if(message.content.startsWith(prefix + "top voice")) {
+            var topArray = Object.values(top[message.guild.id]);
+            var num = 0;
+            var voiceStr = `${topArray.sort((a, b) => b.voice - a.voice).slice(0, 5).filter(user => user.voice > 0 && message.guild.members.get(user.id)).map(function (user) {
+                if (user.voice > 0) {
+                    return `**#${++num} | <@${user.id}> XP: \`${user.voice}\` **`
+                }
+            }).join("\n")}`;
+            var embed = new Discord.RichEmbed()
+            .setAuthor("?? | Guild Score Leaderboards", message.guild.iconURL)
+  .setColor("13B813")
+        .addField(`**:microphone2: | VOICE LEADERBOARD**`, `${voiceStr}   \n\n\n **:sparkles: More?** \`${prefix}top voice\``, true)
+  
+        .setFooter(message.author.tag, message.author.displayAvatarURL)
+            .setTimestamp()  
+            message.channel.send({
+                embed: embed
+            });
+      
+    } else {
+      if (message.content.startsWith(prefix + "reset voice")){
+      var reset = ':white_check_mark:  ?? ????? ?????? ?????'
+      var confirm = ' ??? ????? ??? ???? ????? ???? ???? ??????'
+        
+        message.channel.send(`**${confirm}**`).then(async msg => {
+         await  msg.react("?")
+        await   msg.react("?")
+          const doma = msg.createReactionCollector((reaction, user) => reaction.emoji.name === "?" && user.id === message.author.id, {time: 60000})
+          const ziad = msg.createReactionCollector((reaction, user) => reaction.emoji.name === "?" && user.id === message.author.id, {time: 60000})
+doma.on("collect", async r => {
+ 
+  
+  
+  msg.delete()
+    
+    msg.channel.send(`${reset}`)
+  
+})
+  
+  ziad.on("collect", async r => {
+    
+    msg.delete()
+  })
+      
+        })
+ 
+     //  break;
+       // if (!message.content.startsWith(prefix)) return;
+  } else {
+       if(message.content.startsWith(prefix + "top")) {
+            var topArray = Object.values(top[message.guild.id]);
+            var num = 0;
+            var textStr = `${topArray.sort((a, b) => b.text - a.text).slice(0, 10).filter(user => user.text > 0 && message.guild.members.get(user.id)).map(function (user) {
+                if (user.text > 0) {
+                    return `**#${++num} | <@${user.id}> XP: \`${user.text}\` **`
+                }
+            }).join("\n")}`;
+            num = 0;
+            var voiceStr = `${topArray.sort((a, b) => b.voice - a.voice).slice(0, 10).filter(user => user.voice > 0 && message.guild.members.get(user.id)).map(function (user) {
+                if (user.voice > 0) {
+                    return `**#${++num} | <@${user.id}> XP: \`${user.voice}\` **`
+                }
+            }).join("\n")}`;
+            var embed = new Discord.RichEmbed()  
+            .setAuthor("?? | Guild Score Leaderboards", message.guild.iconURL)
+            .addField("**TOP 5 TEXT :speech_balloon:**", `${textStr}  \n\n  **:sparkles: More?** \`${prefix}top text\``, true)
+            .addField("**TOP 5 VOICE :microphone2:**", `${voiceStr} \n\n **:sparkles: More?** \`${prefix}top voice\``, true)
+            .setFooter(message.author.tag, message.author.displayAvatarURL)
+            .setTimestamp()
+            .setColor("13B813");
+            message.channel.send({
+                embed: embed
+            
+  
+            });
+ 
+      
+       
+        }
+  }
+  }
+  }
+});
                       
  
 client.login(process.env.TOKEN);
