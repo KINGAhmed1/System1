@@ -100,20 +100,6 @@ console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
   }, 10000);//لازم تخلي رتبه البوت اعلى من رتبه الون تبعه
 })
 
-client.on("message", m => {
-  if (m.content === "help") {
-    let Dashboard = "Soon";
-    var addserver ="https://discord.com/api/oauth2/authorize?client_id=734885025484374036&permissions=8&scope=bot";
-    var SUPPORT = "https://discord.gg/6weHnd7";
-    let embed = new Discord.RichEmbed().setTitle(`Helpful Links`)
-      .setDescription(`                                                                                                               
-**[Add To Your Server ](${addserver})**    
-**[Dashboard](${Dashboard})**
-**[ Server Support](${SUPPORT})**`);
-    m.react("✅");
-    m.author.send(embed);
-  }
-});
 
 
 
