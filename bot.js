@@ -38,23 +38,23 @@ client.user.setActivity('!help', { type: 'PLAYING' })
 });
 
 
+var prefix = "-"
+client.on('message', message=> {
+  if (message.content.toLowerCase().startsWith(prefix + 'order')){
 
-client.on('message', msg => {
-  if (msg.content.toLowerCase().startsWith(prefix + 'order')){
-
-    var abdel = msg.content.split(" ").slice(1).join(" ")
+    var abdel = message.content.split(" ").slice(1).join(" ")
     var order = '764160060669558866' //ايدي روم الطلبات
     var order2 = '764388254220550144' //ايدي الروم يلي يترسل فيه الطلب
 
-  if(msg.channel.id !== (order)) return msg.channel.send(`**You Can't Order Here Dude, Sorry But Those Are The Rules.**`);
+  if(message.channel.id !== (order)) return message.channel.send(`**You Can't Order Here Dude, Sorry But Those Are The Rules.**`);
   if(!order) return message.reply("There is no room have the name orders");
-    msg.channel.send('**Your Order Sent, Thank You.**')
-    msg.delete({timeout:5000})
+    message.channel.send('**Your Order Sent, Thank You.**')
+    message.delete({timeout:5000})
     
    
         var ultra = new Discord.MessageEmbed()
          .setColor('RANDOM')
-         .setThumbnail(msg.author.avatarURL())
+         .setThumbnail(message.author.avatarURL())
          .setTitle('New Order!')
          .setDescription(`
          ✠▬▬▬▬▬▬ஜ:radioactive:❦۞❦:radioactive:ஜ▬▬▬▬▬▬✠
@@ -66,11 +66,11 @@ client.on('message', msg => {
          .setTimestamp()
          .setFooter('New Order In The Shop!')
          client.channels.cache.get(order2).send(`https://cdn.discordapp.com/attachments/749238853117804554/757981001585655960/New_Project_27_F31615F.gif`)//هنا رابط الخط
-         client.channels.cache.get(order2).send(`**That Order Sent By : ☞ ** ${msg.author}`)
+         client.channels.cache.get(order2).send(`**That Order Sent By : ☞ ** ${message.author}`)
          client.channels.cache.get(order2).send(ultra).then(m => {
-          msg.react("✅")  
+          message.react("✅")  
           }).catch(() => {
-          return msg.react("❌")
+          return message.react("❌")
   });
           
 }});
