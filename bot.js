@@ -37,8 +37,7 @@ client.on('ready', () => {
 client.user.setActivity('!help', { type: 'PLAYING' })
 });
 
-//✠▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ஜ:radioactive:❦۞❦:radioactive:ஜ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬✠
-//Coding Start.
+
 
 client.on('message', msg => {
   if (msg.content.toLowerCase().startsWith(prefix + 'order')){
