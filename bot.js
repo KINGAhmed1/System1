@@ -34,11 +34,10 @@ client.on('ready', () => {
   console.log(`channels! [ " ${client.channels.size} " ]`);
   console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
  
-client.user.setActivity('!help', { type: 'PLAYING' })
+client.user.setActivity('˞˞conan#2247', { type: 'PLAYING' })
 });
 
 
-var prefix = "-"
 client.on('message', message=> {
   if (message.content.toLowerCase().startsWith(prefix + 'order')){
 
