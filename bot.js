@@ -926,12 +926,7 @@ doma.on("collect", async r => {
   }
 });
 
-//give away
-const Enmap = require('enmap');
-const cd = require('countdown');
-const totime = require('to-time');
-const dbg = new Enmap({ name: 'Giveaway' });
-//gstart
+//give away/gstart
 client.on("ready", async () => {
   await dbg.defer;
   client.guilds.cache.forEach(async g => {
