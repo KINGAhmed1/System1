@@ -110,6 +110,90 @@ client.on("message" , message => {
 	}
 });
 
+const activity = [
+    "˞˞conan#2247", 
+    "˞˞conan#2247 <3", 
+    "صلي على النبي ",
+    "استغفر الله",
+    "اذكر الله",
+];///CUKUR
+
+client.on("ready", function (){///CUKUR
+    console.log(`${client.user.username} Is now active`);///CUKUR
+    let i = 0;
+///CUKUR
+///CUKUR
+    setInterval(()=>{///CUKUR
+        const index = Math.floor(i);///CUKUR
+    client.user.setActivity(activity[index],{type:"PLAYING"});///CUKUR
+    i = i + 1;///CUKUR///CUKUR
+    if(i === activity.length) i = i - activity.length;///CUKUR
+///CUKUR///CUKUR///CUKUR
+    },5000)///CUKUR
+})///CUKUR
+
+client.on('message', message => {
+if(message.content.startsWith(prefix +"server")){
+if(!message.channel.guild) return message.reply(' ');
+const millis = new Date().getTime() - message.guild.createdAt.getTime();
+const now = new Date();
+dateFormat(now, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
+const verificationLevels = ['None', 'Low', 'Medium', 'Insane', 'Extreme'];
+const days = millis / 1000 / 60 / 60 / 24;
+let roles = client.guilds.get(message.guild.id).roles.map(r => r.name);
+var embed  = new Discord.RichEmbed()
+.setAuthor(message.guild.name, message.guild.iconURL)
+.addField("**🆔 Server ID:**", message.guild.id,true)
+.addField("**⏲ Created On**", message.guild.createdAt.toLocaleString(),true)
+.addField("**💠 Owned by**",`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`)
+.addField("**👥 Members**",`[${message.guild.memberCount}]`,true)
+.addField('**📄 Channels **',`**${message.guild.channels.filter(m => m.type === 'text').size}**` + ' text ✏ | 🔊 Voice  '+ `**${message.guild.channels.filter(m => m.type === 'voice').size}** `,true)
+.addField("**🌐 Others **" , message.guild.region,true)
+.addField("**💱 Roles **",`**[${message.guild.roles.size}]** Role `,true)
+message.channel.sendEmbed(embed)
+ 
+}
+});
+
+client.on('message', function(message) {
+    if(message.content.startsWith(prefix + "report")) {
+      if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
+        let messageArgs = message.content.split(" ").slice(1).join(" ");
+        let messageReason = message.content.split(" ").slice(2).join(" ");
+        if(!messageReason) return message.reply("**# الرجاء تحديد السبب!**");
+    let mUser = message.mentions.users.first();
+    if(!mUser) return message.channel.send("تعذر العثور على مستخدم.");
+    let Rembed = new Discord.RichEmbed()
+    .setTitle("`تقرير جديد!`")
+    .setThumbnail(message.author.avatarURL)
+    .addField("**# - المستخدم الذي تم الإبلاغ عنه:**",mUser,true)
+    .addField("**# - معرف الذي تم الإبلاغ عنه:**",mUser.id,true)
+    .addField("**# - السبب:**",messageReason,true)
+    .addField("**# - قناه:**",message.channel,true)
+    .addField("**# - الوقت:**",message.createdAt,true)
+    .setFooter("لو ان الابلاغ فيه مزح راح يتعرض صاحب الابلاغ لعوبات")
+message.channel.send(Rembed)
+message.channel.send("__هل تريد بالتأكيد إرسال هذا إلى الإداره ؟؟__").then(msg => {
+    msg.react("✅")
+    msg.react("❌")
+.then(() => msg.react('❌'))
+.then(() =>msg.react('✅'))
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+reaction1.on("collect", r => {
+    message.guild.owner.send(Rembed)
+    message.reply("**# - Done! 🎇**");
+})
+reaction2.on("collect", r => {
+    message.reply("**# - Canceled!**");
+})
+})
+}
+});
+
 client.on("message", message => {
 	let avt = `${message.author.avatarURL}`;
   let args = message.content.split(" ")
